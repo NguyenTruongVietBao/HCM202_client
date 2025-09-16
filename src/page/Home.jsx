@@ -63,8 +63,8 @@ const Home = () => {
                 Nội Dung <span className='text-red-600'>Chính</span>
               </h2>
               <p className='text-xl text-gray-600 max-w-3xl mx-auto'>
-                Khám phá tư tưởng Hồ Chí Minh qua 4 chương chính được trình bày
-                một cách có hệ thống
+                Khám phá Tư tưởng Hồ Chí Minh thông qua 4 chương chính được
+                trình bày một cách có hệ thống.
               </p>
             </div>
 
@@ -100,7 +100,7 @@ const Home = () => {
                             image: section.image,
                             videoUrl: section.videoUrl,
                             qrData: section.qrData,
-                            author: 'Nhóm 2 - HCM202',
+                            author: 'HCM202 - Nhóm 2',
                             date: new Date().toLocaleDateString('vi-VN'),
                             readTime: '15 phút',
                             tags: [
