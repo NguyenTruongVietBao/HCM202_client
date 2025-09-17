@@ -11,7 +11,7 @@ export default function QRCode({ data, size = 100 }) {
       <img src={qrUrl} alt='QR Code' className='w-24 h-24 mb-2 rounded-lg' />
       <span className='text-xs font-semibold text-red-700 flex items-center gap-1'>
         <QrCode size={14} />
-        Quét để xem video
+        Xem thêm
       </span>
     </div>
   );

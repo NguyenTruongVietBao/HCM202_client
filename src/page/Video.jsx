@@ -1,14 +1,15 @@
-import React from 'react';
-import { useParams, useSearchParams, Link } from 'react-router';
+import React, { useState } from 'react';
+import { Link, useParams, useSearchParams } from 'react-router';
 import { mainContent } from '../lib/constants';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { ArrowLeft, Calendar, QrCode, Clock, Share2 } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, Share2 } from 'lucide-react';
 
 export default function Video() {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const slug = searchParams.get('slug');
+  const [expanded, setExpanded] = useState(false);
 
   const section = mainContent.sections.find((s) => s.id === slug) || {
     title: 'Video tư liệu',
@@ -107,26 +108,27 @@ export default function Video() {
   return (
     <div className='min-h-screen bg-gradient-to-br from-gray-50 to-white'>
       <Header />
-
+      <div className='bg-gradient-to-r from-red-600 via-red-700 to-red-800 '>
+        <div className='flex items-center justify-between max-w-7xl mx-auto px-4'>
+          <Link
+            to='/'
+            className='inline-flex items-center gap-2 px-4 py-2 text-yellow-200 hover:text-white hover:bg-red-600/40 rounded-full transition-colors'
+          >
+            <ArrowLeft size={20} />
+            Quay lại
+          </Link>
+          <Link
+            to='/'
+            className='text-sm text-yellow-200 hover:text-white underline underline-offset-4'
+          >
+            Về trang chủ
+          </Link>
+        </div>
+      </div>
       {/* Hero/Title */}
       <section className='relative py-10 bg-gradient-to-r from-red-600 via-red-700 to-red-800'>
         <div className='absolute inset-0 bg-yellow-400 opacity-10'></div>
         <div className='max-w-7xl mx-auto px-4'>
-          <div className='flex items-center justify-between'>
-            <Link
-              to='/'
-              className='inline-flex items-center gap-2 px-4 py-2 text-yellow-200 hover:text-white hover:bg-red-600/40 rounded-full transition-colors'
-            >
-              <ArrowLeft size={20} />
-              Quay lại
-            </Link>
-            <Link
-              to='/'
-              className='text-sm text-yellow-200 hover:text-white underline underline-offset-4'
-            >
-              Về trang chủ
-            </Link>
-          </div>
           <div className='mt-6'>
             <h1 className='text-2xl md:text-4xl font-bold text-white'>
               {section.title}
@@ -178,13 +180,29 @@ export default function Video() {
                 alt={section.title}
                 className='w-full h-40 object-cover'
               />
-              <div className='p-6 space-y-4'>
+              <div className='p-6 space-y-4 relative'>
                 <h3 className='text-lg font-semibold text-gray-900'>
                   Thông tin
                 </h3>
-                <div className='prose prose-sm max-w-none'>
+                <div
+                  className={`prose prose-sm max-w-none transition-[max-height] duration-300 ease-in-out ${
+                    expanded ? 'max-h-[1000px]' : 'max-h-64 overflow-hidden'
+                  }`}
+                  aria-expanded={expanded}
+                >
                   {renderStructuredContent(section.longContent)}
                 </div>
+                {!expanded && (
+                  <div className='pointer-events-none absolute left-0 right-0 bottom-20 h-16 bg-gradient-to-t from-white to-transparent'></div>
+                )}
+                <button
+                  type='button'
+                  onClick={() => setExpanded(!expanded)}
+                  className='inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-colors text-sm font-semibold'
+                  aria-controls='sidebar-content'
+                >
+                  {expanded ? 'Thu gọn' : 'Xem đầy đủ'}
+                </button>
               </div>
             </div>
           </aside>

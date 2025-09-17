@@ -60,6 +60,14 @@ export default function About() {
     },
   ];
 
+  const founders = [
+    { name: 'Nguyễn Trương Viết Bảo', role: 'Đồng sáng lập' },
+    { name: 'Nguyễn Khánh Tùng', role: 'Đồng sáng lập' },
+    { name: 'Lê Xuân Long', role: 'Đồng sáng lập' },
+    { name: 'Thành Hứa Gia Kin', role: 'Đồng sáng lập' },
+    { name: 'Phạm Tiến Hưng', role: 'Đồng sáng lập' },
+  ];
+
   return (
     <div className='min-h-screen bg-gradient-to-br from-gray-50 to-white'>
       <Header />
@@ -109,6 +117,39 @@ export default function About() {
                 - Chủ tịch Hồ Chí Minh ({famousQuotes[1].year})
               </cite>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Founders */}
+      <section className='py-16 bg-white'>
+        <div className='max-w-7xl mx-auto px-4'>
+          <div className='text-center mb-12'>
+            <h2 className='text-3xl font-bold text-gray-900 mb-4'>
+              Nhóm <span className='text-red-600'>Sáng lập</span>
+            </h2>
+            <p className='text-lg text-gray-600'>
+              Tạp chí được thành lập bởi các thành viên:
+            </p>
+          </div>
+
+          <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6'>
+            {founders.map((person, idx) => (
+              <div
+                key={idx}
+                className='text-center p-6 bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300'
+              >
+                <div className='w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-xl font-bold'>
+                  {person.name.split(' ').pop().charAt(0)}
+                </div>
+                <h3 className='text-base font-semibold text-gray-900 mb-1'>
+                  {person.name}
+                </h3>
+                <p className='text-sm text-red-600 font-medium'>
+                  {person.role}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
